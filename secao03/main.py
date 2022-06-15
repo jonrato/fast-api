@@ -3,6 +3,9 @@ from typing import List, Optional
 from fastapi.responses import JSONResponse
 from distutils.log import debug
 from fastapi import Path
+from fastapi import Query
+from fastapi import Header
+
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi import status
@@ -63,8 +66,12 @@ async def delete_curso(curso_id: int):
                             detail='Não existe um curso com id {curso_id}')
 
 @app.get('/calculadora')
-async def calcular(a,b,c):
-    soma = a+b+c
+async def calcular(a:int = Query(default=None,gt=5),b:int = Query(default=None, gt=10),x_geek: str = Header(default=None), c:Optional[int]=None):
+    soma: int = a + b
+    if c:
+        soma = soma + c
+
+    print(f'X-GEEK: {x_geek}')
     return {"resultado": soma}
 
 if __name__ == '__main__':
