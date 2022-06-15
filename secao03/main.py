@@ -64,8 +64,8 @@ async def delete_curso(curso_id: int):
 
 @app.get('/calculadora')
 async def calcular(a,b,c):
-    resultado = a+b+c
-    return {"resultado": resultado}
+    soma = a+b+c
+    return {"resultado": soma}
 
 if __name__ == '__main__':
     import uvicorn
